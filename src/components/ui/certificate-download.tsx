@@ -90,7 +90,7 @@ export default function CertificateDownload() {
         <CardContent className="col-span-2 my-auto">
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              className="poppins-regulartext-lg h-12 lg:h-12 lg:text-xl"
+              className="poppins-regular text-lg h-12 lg:h-12 lg:text-xl"
               type="email"
               placeholder="Enter your email"
               value={email}
