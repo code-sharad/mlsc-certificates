@@ -85,7 +85,7 @@ export default function CertificateDownload() {
             <img
              fetchPriority="low"
               src={bglogo}
-              className="h-44 scale-75   w-44 blur-lg animate-pulse  relative"
+              className="h-44 w-44 bg-blend-lighten blur-lg animate-pulse  relative"
             />
             <img src={logo} className="h-44 w-44  absolute top-0 " />
           </div>
