@@ -78,15 +78,19 @@ export default function CertificateDownload() {
     <div className=" ">
       <Card className="lg:w-[800px] lg:h-[400px] lg:grid lg:grid-cols-3 place-content-center ">
         <CardHeader className="col-span-1 w-full">
-          <img src={logo} className="h-44 w-44 mx-auto"/>
-          <CardTitle className="text-2xl font-semibold lg:text-3xl  text-center text-gray-800">
-            MLSC Workshop Certificate
+          <img src={logo} className="h-44 w-44 mx-auto" />
+          <CardTitle className="text-3xl arima font-semibold lg:text-3xl text-center text-gray-800">
+            <b>MLSC Workshop Certificate </b>{" "}
           </CardTitle>
+          <p className="text-center text-gray-600 mt-2">
+            Enter your email and select the workshop to download your
+            certificate.
+          </p>
         </CardHeader>
         <CardContent className="col-span-2 my-auto">
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              className="font-mono text-lg lg:h-12 lg:text-xl"
+              className="poppins-regular text-lg lg:h-12 lg:text-xl"
               type="email"
               placeholder="Enter your email"
               value={email}
@@ -99,15 +103,19 @@ export default function CertificateDownload() {
               </SelectTrigger>
               <SelectContent className="h-18 ">
                 {workshops.map((w) => (
-                  <SelectItem key={w.value} className="lg:text-lg text-base" value={w.value}>
+                  <SelectItem
+                    key={w.value}
+                    className="lg:text-lg text-base"
+                    value={w.value}
+                  >
                     {w.value}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
             {!isCompleted && (
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Checking... " : "Find Certificate"}
+              <Button type="submit" className="w-full text-base" disabled={isLoading}>
+                {isLoading ? "Checking... " : "Get Certificate"}
               </Button>
             )}
           </form>
