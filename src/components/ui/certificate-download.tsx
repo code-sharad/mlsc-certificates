@@ -33,9 +33,10 @@ const checkCompletion = async (
     },
     body: JSON.stringify({ email, workshop }),
   };
-  const res = await fetch(`${base_url}/certificate`, requestOptions).then(
-    (res) => res.json()
-  );
+  const res = await fetch(
+    `${base_url}/certificatedetails`,
+    requestOptions
+  ).then((res) => res.json());
   setResData(res);
   console.log(res);
   return res.message == "Email not found" ? false : true;
