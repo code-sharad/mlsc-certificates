@@ -82,7 +82,7 @@ export default function CertificateDownload() {
         <CardHeader className="col-span-1 w-full">
           <div className="relative mx-auto">
             <img
-             fetchPriority="low"
+              fetchPriority="low"
               src={logo}
               className="h-44 w-44 bg-blend-lighten blur-lg animate-pulse  relative"
             />
@@ -147,19 +147,19 @@ export default function CertificateDownload() {
             </Alert>
           )}
 
-          {isCompleted && (
+          {
             <div className="mt-6 flex justify-center items-center">
-              <Button className="py-6">
+              <Button className="py-6 poppins-regular">
                 <a
                   download={true}
                   href={resData?.certificate_url}
                   className="w-full flex gap-1 items-center justify-center text-xl "
                 >
-                  <Download className="mr-2 h-4 w-4" /> Download Certificate 🎉
+                  🎉 Download Certificate 🎉
                 </a>
               </Button>
             </div>
-          )}
+          }
         </CardContent>
       </Card>
     </div>
