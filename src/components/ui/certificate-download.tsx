@@ -12,7 +12,7 @@ import {
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
-import logo from "../../../public/logo.png";
+import logo from "../../../public/image.png";
 
 const base_url = import.meta.env.VITE_BACKEND_URL;
 type CertificateResponse = {
