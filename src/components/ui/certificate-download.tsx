@@ -147,8 +147,8 @@ export default function CertificateDownload() {
             </Alert>
           )}
 
-          {
-            <div className="mt-6 flex justify-center items-center">
+          {isCompleted && (
+            <div className="mt-6 flex  justify-center items-center">
               <Button className="py-6 poppins-regular">
                 <a
                   download={true}
@@ -159,7 +159,7 @@ export default function CertificateDownload() {
                 </a>
               </Button>
             </div>
-          }
+          )}
         </CardContent>
       </Card>
     </div>
