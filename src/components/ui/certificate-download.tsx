@@ -13,7 +13,7 @@ import { AlertCircle, Download } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 import logo from "../../../public/logo.png";
-import bg from "../../../public/vite.svg"
+import bglogo from "../../../public/bglogo.png"
 
 const base_url = import.meta.env.VITE_BACKEND_URL;
 type CertificateResponse = {
@@ -84,10 +84,10 @@ export default function CertificateDownload() {
           <div className="relative mx-auto">
             <img
              fetchPriority="low"
-              src={bg}
+              src={bglogo}
               className="h-44 scale-75   w-44 blur-lg animate-pulse  relative"
             />
-            <img fetchPriority="high" src={logo} className="h-44 w-44  absolute top-0 " />
+            <img src={logo} className="h-44 w-44  absolute top-0 " />
           </div>
           <CardTitle className="text-3xl arima font-semibold lg:text-3xl text-center text-gray-800">
             <b>MLSC Workshop Certificate </b>{" "}
