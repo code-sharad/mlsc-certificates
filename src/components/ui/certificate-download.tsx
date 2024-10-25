@@ -87,7 +87,7 @@ export default function CertificateDownload() {
               src={bg}
               className="h-44 scale-75   w-44 blur-lg animate-pulse  relative"
             />
-            <img src={logo} className="h-44 w-44  absolute top-0 " />
+            <img fetchPriority="high" src={logo} className="h-44 w-44  absolute top-0 " />
           </div>
           <CardTitle className="text-3xl arima font-semibold lg:text-3xl text-center text-gray-800">
             <b>MLSC Workshop Certificate </b>{" "}
