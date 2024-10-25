@@ -64,7 +64,7 @@ export default function CertificateDownload() {
       const completed = await checkCompletion(email, workshop, setResData);
       setIsCompleted(completed);
       if (!completed) {
-        setError("Plese check you email.");
+        setError("Please enter the email address you used when filling out the Google form.");
       }
     } catch (error) {
       console.log(error);
