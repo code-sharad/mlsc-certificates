@@ -83,8 +83,9 @@ export default function CertificateDownload() {
         <CardHeader className="col-span-1 w-full">
           <div className="relative mx-auto">
             <img
+             fetchPriority="low"
               src={bg}
-              className="h-44 scale-75  w-44 blur-lg animate-pulse  relative"
+              className="h-44 scale-75   w-44 blur-lg animate-pulse  relative"
             />
             <img src={logo} className="h-44 w-44  absolute top-0 " />
           </div>
