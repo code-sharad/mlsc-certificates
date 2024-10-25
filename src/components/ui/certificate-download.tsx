@@ -13,6 +13,7 @@ import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 import logo from "../../../public/image.png";
+import Realistic from "react-canvas-confetti/dist/presets/realistic";
 
 const base_url = import.meta.env.VITE_BACKEND_URL;
 type CertificateResponse = {
@@ -54,6 +55,7 @@ export default function CertificateDownload() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [resData, setResData] = useState<CertificateResponse | null>(null);
+  const [celebrate, setCelebrate] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,7 +65,10 @@ export default function CertificateDownload() {
     try {
       const completed = await checkCompletion(email, workshop, setResData);
       setIsCompleted(completed);
+      setCelebrate(false);
+
       if (!completed) {
+        setCelebrate(false);
         setError(
           "Please enter the email address you used when filling out the Google form."
         );
@@ -73,11 +78,13 @@ export default function CertificateDownload() {
       setError("An error occurred. Please try again.");
     } finally {
       setIsLoading(false);
+      setCelebrate(false);
     }
   };
 
   return (
     <div className="">
+      <div>{celebrate && <Realistic autorun={{duration:2,speed:8}} />}</div>
       <Card className="lg:max-w-[900px] lg:p-14 lg:max-h-[500px] lg:grid lg:grid-cols-3 place-content-center ">
         <CardHeader className="col-span-1 w-full">
           <div className="relative mx-auto">
@@ -149,10 +156,11 @@ export default function CertificateDownload() {
 
           {isCompleted && (
             <div className="mt-6 flex  justify-center items-center">
-              <Button className="py-6 poppins-regular">
+              <Button className="py-6 poppins-regular lg:mt-9">
                 <a
                   download={true}
                   href={resData?.certificate_url}
+                  onClick={() => setCelebrate(true)}
                   className="w-full flex gap-1 items-center justify-center text-xl "
                 >
                   🎉 Download Certificate 🎉
