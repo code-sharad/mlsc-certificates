@@ -13,7 +13,6 @@ import { AlertCircle, Download } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 import logo from "../../../public/logo.png";
-import bglogo from "../../../public/bglogo.png"
 
 const base_url = import.meta.env.VITE_BACKEND_URL;
 type CertificateResponse = {
@@ -84,7 +83,7 @@ export default function CertificateDownload() {
           <div className="relative mx-auto">
             <img
              fetchPriority="low"
-              src={bglogo}
+              src={logo}
               className="h-44 w-44 bg-blend-lighten blur-lg animate-pulse  relative"
             />
             <img src={logo} className="h-44 w-44  absolute top-0 " />
