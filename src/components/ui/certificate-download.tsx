@@ -98,7 +98,7 @@ export default function CertificateDownload() {
               required
             />
             <Select value={workshop} onValueChange={setWorkshop}>
-              <SelectTrigger className="h-12 lg:text-xl text-base">
+              <SelectTrigger className="h-12 lg:text-xl poppins-regular text-[18px]">
                 <SelectValue placeholder="Select workshop" />
               </SelectTrigger>
               <SelectContent className="h-18 ">
@@ -114,8 +114,19 @@ export default function CertificateDownload() {
               </SelectContent>
             </Select>
             {!isCompleted && (
-              <Button type="submit" className="w-full text-base" disabled={isLoading}>
-                {isLoading ? "Checking... " : "Get Certificate"}
+              <Button
+                type="submit"
+                className="w-full text-base"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  "Checking... "
+                ) : (
+                  <div className="flex gap-3 ">
+                    <span>👉</span>
+                    <span className="poppins-regular">Get Certificate</span>
+                  </div>
+                )}
               </Button>
             )}
           </form>
