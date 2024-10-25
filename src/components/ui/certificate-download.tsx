@@ -12,7 +12,8 @@ import {
 import { AlertCircle, Download } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
-import logo from "../../../public/logo.png"
+import logo from "../../../public/logo.png";
+import bg from "../../../public/vite.svg"
 
 const base_url = import.meta.env.VITE_BACKEND_URL;
 type CertificateResponse = {
@@ -64,7 +65,9 @@ export default function CertificateDownload() {
       const completed = await checkCompletion(email, workshop, setResData);
       setIsCompleted(completed);
       if (!completed) {
-        setError("Please enter the email address you used when filling out the Google form.");
+        setError(
+          "Please enter the email address you used when filling out the Google form."
+        );
       }
     } catch (error) {
       console.log(error);
@@ -78,7 +81,13 @@ export default function CertificateDownload() {
     <div className="">
       <Card className="lg:max-w-[900px] lg:p-14 lg:max-h-[500px] lg:grid lg:grid-cols-3 place-content-center ">
         <CardHeader className="col-span-1 w-full">
-          <img src={logo} className="h-44 w-44 mx-auto" />
+          <div className="relative mx-auto">
+            <img
+              src={bg}
+              className="h-44 scale-75  w-44 blur-lg animate-pulse  relative"
+            />
+            <img src={logo} className="h-44 w-44  absolute top-0 " />
+          </div>
           <CardTitle className="text-3xl arima font-semibold lg:text-3xl text-center text-gray-800">
             <b>MLSC Workshop Certificate </b>{" "}
           </CardTitle>
