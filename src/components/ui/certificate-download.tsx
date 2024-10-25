@@ -76,14 +76,14 @@ export default function CertificateDownload() {
 
   return (
     <div className=" ">
-      <Card className="lg:w-[800px] lg:h-[400px] lg:grid lg:grid-cols-3 place-content-center">
+      <Card className="lg:w-[800px] lg:h-[400px] lg:grid lg:grid-cols-3 place-content-center ">
         <CardHeader className="col-span-1 w-full">
           <img src={logo} className="h-44 w-44 mx-auto"/>
           <CardTitle className="text-2xl font-semibold lg:text-3xl  text-center text-gray-800">
             MLSC Workshop Certificate
           </CardTitle>
         </CardHeader>
-        <CardContent className="col-span-2">
+        <CardContent className="col-span-2 my-auto">
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
               className="font-mono text-lg lg:h-12 lg:text-xl"
