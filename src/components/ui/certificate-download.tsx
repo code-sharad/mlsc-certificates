@@ -90,7 +90,7 @@ export default function CertificateDownload() {
         <CardContent className="col-span-2 my-auto">
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              className="poppins-regular text-lg lg:h-12 lg:text-xl"
+              className="poppins-regular text-lg h-12 lg:h-12 lg:text-xl"
               type="email"
               placeholder="Enter your email"
               value={email}
@@ -98,14 +98,14 @@ export default function CertificateDownload() {
               required
             />
             <Select value={workshop} onValueChange={setWorkshop}>
-              <SelectTrigger className="h-12 lg:text-xl poppins-regular text-wrap text-[18px]">
+              <SelectTrigger className="h-12  poppins-regular text-wrap text-base">
                 <SelectValue placeholder="Select workshop" />
               </SelectTrigger>
               <SelectContent className="h-18 ">
                 {workshops.map((w) => (
                   <SelectItem
                     key={w.value}
-                    className="lg:text-lg text-base"
+                    className="text-base"
                     value={w.value}
                   >
                     {w.value}
