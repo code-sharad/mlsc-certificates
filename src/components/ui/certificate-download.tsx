@@ -98,7 +98,7 @@ export default function CertificateDownload() {
               required
             />
             <Select value={workshop} onValueChange={setWorkshop}>
-              <SelectTrigger className="h-12 lg:text-xl poppins-regular text-[18px]">
+              <SelectTrigger className="h-12 lg:text-xl poppins-regular text-wrap text-[18px]">
                 <SelectValue placeholder="Select workshop" />
               </SelectTrigger>
               <SelectContent className="h-18 ">
