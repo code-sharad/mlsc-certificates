@@ -164,10 +164,11 @@ export default function CertificateDownload() {
 
           {isCompleted && (
             <div className="mt-6 flex  justify-center items-center">
-              <Button className="py-6 poppins-regular lg:mt-9">
+              <Button disabled={isDownloading} className="py-6 poppins-regular lg:mt-9">
                 <a
                   download={true}
                   onLoad={() => console.log("downloaded the pdf")}
+                  
                   onClick={(e) => {
                     e.preventDefault();
                     window.location.href = resData?.certificate_url || "";
