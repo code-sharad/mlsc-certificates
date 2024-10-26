@@ -14,6 +14,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 
 import logo from "../../../public/image.png";
 import Realistic from "react-canvas-confetti/dist/presets/realistic";
+import { toast } from "sonner";
 
 const base_url = import.meta.env.VITE_BACKEND_URL;
 type CertificateResponse = {
@@ -73,6 +74,15 @@ export default function CertificateDownload() {
           "Please enter the email address you used when filling out the Google form."
         );
       }
+      toast.success(
+        " Certificate generated successfully! ",
+        {
+          duration: 5000,
+          position: "top-right",
+          closeButton: true,
+          icon: "🎉",
+        }
+      );
     } catch (error) {
       console.log(error);
       setError("An error occurred. Please try again.");
@@ -84,7 +94,9 @@ export default function CertificateDownload() {
 
   return (
     <div className="">
-      <div>{celebrate && <Realistic autorun={{duration:2,speed:8}} />}</div>
+      <div>
+        {celebrate && <Realistic autorun={{ duration: 3, speed: 15 }} />}
+      </div>
       <Card className="lg:max-w-[900px] lg:p-14 lg:max-h-[500px] lg:grid lg:grid-cols-3 place-content-center ">
         <CardHeader className="col-span-1 w-full">
           <div className="relative mx-auto">
@@ -160,7 +172,16 @@ export default function CertificateDownload() {
                 <a
                   download={true}
                   href={resData?.certificate_url}
-                  onClick={() => setCelebrate(true)}
+                  onClick={() => {
+                    setCelebrate(true);
+                    toast.success("Congratulations!", {
+                      duration: 5000,
+                      position: "top-right",
+                      closeButton: true,
+                      icon: "🎉",
+                    }); 
+                    
+                  }}
                   className="w-full flex gap-1 items-center justify-center text-xl "
                 >
                   🎉 Download Certificate 🎉
