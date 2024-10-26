@@ -106,21 +106,10 @@ export default function CertificateDownload() {
           <CardTitle className="text-3xl arima font-semibold lg:text-3xl text-center text-gray-800">
             <b>MLSC Workshop Certificate </b>{" "}
           </CardTitle>
-          <p className="text-center text-gray-600 mt-2">
-            Enter your email and select the workshop to download your
-            certificate.
-          </p>
+         
         </CardHeader>
         <CardContent className="col-span-2 my-auto">
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              className="poppins-regular text-lg h-12 lg:h-12 lg:text-xl"
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
             <Select value={workshop} onValueChange={setWorkshop}>
               <SelectTrigger className="h-12  poppins-regular text-wrap text-base lg:text-lg">
                 <SelectValue placeholder="Select workshop" />
@@ -137,6 +126,15 @@ export default function CertificateDownload() {
                 ))}
               </SelectContent>
             </Select>
+            <Input
+              className="poppins-regular text-lg h-12 lg:h-12 lg:text-xl"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+
             {!isCompleted && (
               <Button
                 type="submit"
