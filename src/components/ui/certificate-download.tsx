@@ -220,7 +220,7 @@ export default function CertificateDownload() {
           {error && (
             <Alert variant="destructive" className="mt-4">
               <AlertCircle className="h-4 w-4" />
-              <AlertDescription className="mt-1">{error}</AlertDescription>
+              <AlertDescription className="mt-1 text-red-600">{error}</AlertDescription>
             </Alert>
           )}
 
