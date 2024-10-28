@@ -137,7 +137,7 @@ export default function CertificateDownload() {
           </CardTitle>
         </CardHeader>
         <CardContent className="col-span-2 my-auto">
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form  onSubmit={handleSubmit} className="space-y-4">
             <Select value={workshop} required onValueChange={setWorkshop}>
               <SelectTrigger className="h-12  poppins-regular text-wrap text-base lg:text-lg">
                 <SelectValue placeholder="Select workshop" />
@@ -161,6 +161,7 @@ export default function CertificateDownload() {
               type="text"
               placeholder="Enter Full Name"
               value={fullname}
+              disabled={isCompleted}
               onChange={(e) => {
                 setFullName(e.target.value);
                 searchUser(e.target.value, setSearchResult);
