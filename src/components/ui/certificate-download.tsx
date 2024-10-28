@@ -9,12 +9,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Check } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 
 import logo from "../../../public/image.png";
 import Realistic from "react-canvas-confetti/dist/presets/realistic";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 const base_url = import.meta.env.VITE_BACKEND_URL;
 type CertificateResponse = {
@@ -24,7 +32,7 @@ type CertificateResponse = {
 };
 
 const checkCompletion = async (
-  email: string,
+  full_name: string,
   workshop: string,
   setResData: React.Dispatch<React.SetStateAction<CertificateResponse | null>>
 ) => {
@@ -33,15 +41,35 @@ const checkCompletion = async (
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, workshop }),
+    body: JSON.stringify({ full_name, workshop }),
   };
   const res = await fetch(`${base_url}/certificate`, requestOptions).then(
     (res) => res.json()
   );
   setResData(res);
-  return res.message == "Email not found" ? false : true;
+  return res.message == "full name not found" ? false : true;
 };
 
+const searchUser = async (query: string, setSearchResult: React.Dispatch<React.SetStateAction<string[]>>) => {
+  try {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query }),
+    };
+    const res = await fetch(`${base_url}/user/search`, requestOptions).then(
+      (res) => {
+        return res.json();
+      }
+    );
+    console.log(res);
+    setSearchResult(res);
+  } catch (error) {
+    console.log(error);
+  }
+};
 const workshops = [
   {
     value: "Web Development and Cloud Hosting",
@@ -49,7 +77,7 @@ const workshops = [
 ];
 
 export default function CertificateDownload() {
-  const [email, setEmail] = useState("");
+  const [fullname, setFullName] = useState("");
   const [workshop, setWorkshop] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -57,6 +85,9 @@ export default function CertificateDownload() {
   const [resData, setResData] = useState<CertificateResponse | null>(null);
   const [celebrate, setCelebrate] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [searchResult, setSearchResult] = useState<string[]>([]);
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,14 +95,14 @@ export default function CertificateDownload() {
     setError("");
 
     try {
-      const completed = await checkCompletion(email, workshop, setResData);
+      const completed = await checkCompletion(fullname, workshop, setResData);
       setIsCompleted(completed);
       setCelebrate(false);
 
       if (!completed) {
         setCelebrate(false);
         setError(
-          "Please enter the email address you used when filling out the Google form."
+          "Please enter the full name you used when filling out the Google form."
         );
       }
       toast.success(" Certificate generated successfully! ", {
@@ -90,7 +121,7 @@ export default function CertificateDownload() {
   };
 
   return (
-    <div className="">
+    <div className="z-10">
       <div>
         {celebrate && <Realistic autorun={{ duration: 4, speed: 30 }} />}
       </div>
@@ -106,39 +137,75 @@ export default function CertificateDownload() {
           <CardTitle className="text-3xl arima font-semibold lg:text-3xl text-center text-gray-800">
             <b>MLSC Workshop Certificate </b>{" "}
           </CardTitle>
-         
         </CardHeader>
         <CardContent className="col-span-2 my-auto">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <Select value={workshop} onValueChange={setWorkshop}>
+          <form onSubmit={handleSubmit}  className="space-y-4">
+            <Select  value={workshop} required onValueChange={setWorkshop}>
               <SelectTrigger className="h-12  poppins-regular text-wrap text-base lg:text-lg">
                 <SelectValue placeholder="Select workshop" />
               </SelectTrigger>
-              <SelectContent className="h-18 ">
+              <SelectContent  className="h-18 ">
                 {workshops.map((w) => (
                   <SelectItem
                     key={w.value}
                     className="text-base lg:text-lg"
                     value={w.value}
+                    aria-required={true}
                   >
                     {w.value}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
+
             <Input
               className="poppins-regular text-lg h-12 lg:h-12 lg:text-xl"
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Enter Full Name"
+              value={fullname}
+              onChange={(e) => {
+                setFullName(e.target.value);
+                searchUser(e.target.value, setSearchResult);
+                setOpen(true);
+              }}
               required
             />
+
+            {open && (
+              <Command>
+                <CommandList>
+                  <CommandEmpty>No User found.</CommandEmpty>
+                  <CommandGroup className="border border-gray-200">
+                    {searchResult.slice(0, 3).map((user) => (
+                      <CommandItem
+                        key={user}
+                        value={user}
+                        className="text-lg first:font-semibold uppercase"
+                        onSelect={(currentValue) => {
+                          setValue(currentValue === value ? "" : currentValue);
+                          setOpen(false);
+                          setFullName(currentValue);
+                        }}
+                      >
+                        <Check
+                          className={cn(
+                            "mr-2 h-4 w-4 text-green-700",
+                            value === user ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                        {user}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            )}
+            
 
             {!isCompleted && (
               <Button
                 type="submit"
-                className="w-full text-base"
+                className="w-full text-base z-10"
                 disabled={isLoading}
               >
                 {isLoading ? (
