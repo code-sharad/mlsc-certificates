@@ -50,22 +50,20 @@ const checkCompletion = async (
   return res.message == "full name not found" ? false : true;
 };
 
-const searchUser = async (query: string, setSearchResult: React.Dispatch<React.SetStateAction<string[]>>) => {
+const searchUser = async (
+  query: string,
+  setSearchResult: React.Dispatch<React.SetStateAction<string[]>>
+) => {
   try {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ query }),
-    };
-    const res = await fetch(`${base_url}/user/search`, requestOptions).then(
-      (res) => {
-        return res.json();
-      }
-    );
-    console.log(res);
-    setSearchResult(res);
+    if (query.length >= 2) {
+      const res = await fetch(`${base_url}/user/search?query=${query}`).then(
+        (res) => {
+          return res.json();
+        }
+      );
+      console.log(res);
+      setSearchResult(res);
+    }
   } catch (error) {
     console.log(error);
   }
@@ -86,8 +84,8 @@ export default function CertificateDownload() {
   const [celebrate, setCelebrate] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState("");
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -139,12 +137,12 @@ export default function CertificateDownload() {
           </CardTitle>
         </CardHeader>
         <CardContent className="col-span-2 my-auto">
-          <form onSubmit={handleSubmit}  className="space-y-4">
-            <Select  value={workshop} required onValueChange={setWorkshop}>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <Select value={workshop} required onValueChange={setWorkshop}>
               <SelectTrigger className="h-12  poppins-regular text-wrap text-base lg:text-lg">
                 <SelectValue placeholder="Select workshop" />
               </SelectTrigger>
-              <SelectContent  className="h-18 ">
+              <SelectContent className="h-18 ">
                 {workshops.map((w) => (
                   <SelectItem
                     key={w.value}
@@ -180,7 +178,7 @@ export default function CertificateDownload() {
                       <CommandItem
                         key={user}
                         value={user}
-                        className="text-lg first:font-semibold uppercase"
+                        className="text-lg !my-1 first:!bg-violet-100 hover:!bg-gray-200 first:font-semibold uppercase"
                         onSelect={(currentValue) => {
                           setValue(currentValue === value ? "" : currentValue);
                           setOpen(false);
@@ -200,7 +198,6 @@ export default function CertificateDownload() {
                 </CommandList>
               </Command>
             )}
-            
 
             {!isCompleted && (
               <Button
@@ -247,7 +244,7 @@ export default function CertificateDownload() {
                       icon: "🎉",
                     });
                     setCelebrate(true);
-                    
+
                     setTimeout(() => {
                       setIsDownloading(false);
                       setIsCompleted(false);
