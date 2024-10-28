@@ -41,7 +41,7 @@ const checkCompletion = async (
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ full_name, workshop }),
+    body: JSON.stringify({ full_name, workshop_name:workshop }),
   };
   const res = await fetch(`${base_url}/certificate`, requestOptions).then(
     (res) => res.json()
