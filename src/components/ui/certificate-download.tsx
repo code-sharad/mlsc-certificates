@@ -247,8 +247,12 @@ export default function CertificateDownload() {
                       icon: "🎉",
                     });
                     setCelebrate(true);
+                    
                     setTimeout(() => {
                       setIsDownloading(false);
+                      setIsCompleted(false);
+                      setFullName("");
+                      setSearchResult([]);
                     }, 2500);
                   }}
                   className="w-full flex gap-1 items-center justify-center font-semibold lg:font-normal sm:text-sm  lg:text-xl md:text-xl "
