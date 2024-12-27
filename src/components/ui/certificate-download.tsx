@@ -186,12 +186,12 @@ export default function CertificateDownload() {
               <Command className="">
                 <CommandList>
                   <CommandEmpty>No User found.</CommandEmpty>
-                  <CommandGroup className="border border-gray-200 rounded-md shadow-sm">
+                  <CommandGroup className="border border-gray-200   rounded-md shadow-sm">
                     {searchResult.slice(0, 3).map((user) => (
                       <CommandItem
                         key={user}
                         value={user}
-                        className="text-lg !my-1   hover:transition-all first:!bg-violet-100 hover:!bg-gray-200 first:font-semibold uppercase"
+                        className="text-lg !my-1    hover:transition-all first:!bg-violet-50 hover:!bg-gray-100 first:font-semibold uppercase"
                         onSelect={(currentValue) => {
                           setValue(currentValue === value ? "" : currentValue);
                           setOpen(false);
