@@ -18,3 +18,19 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@keyframes filterAnimation {
+  0% {
+    filter: blur(0);
+  }
+  50% {
+    filter: blur(2px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+
+.filter-animate {
+  animation: filterAnimation 0.5s ease-in-out;
+}

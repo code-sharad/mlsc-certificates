@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,7 +24,7 @@ import Realistic from "react-canvas-confetti/dist/presets/realistic";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
-const base_url = import.meta.env.VITE_BACKEND_URL;
+const base_url: string = import.meta.env.VITE_BACKEND_URL;
 type CertificateResponse = {
   certificate_url: string;
   id: string;
@@ -41,7 +41,7 @@ const checkCompletion = async (
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ full_name, workshop_name:workshop }),
+    body: JSON.stringify({ full_name, workshop_name: workshop }),
   };
   const res = await fetch(`${base_url}/certificate`, requestOptions).then(
     (res) => res.json()
@@ -72,6 +72,9 @@ const workshops = [
   {
     value: "Web Development and Cloud Hosting",
   },
+  {
+    value: "“AllGoRythms” AI and ML Workshop",
+  },
 ];
 
 export default function CertificateDownload() {
@@ -93,7 +96,11 @@ export default function CertificateDownload() {
     setError("");
 
     try {
-      const completed = await checkCompletion(fullname, workshop, setResData);
+      const completed = await checkCompletion(
+        fullname.toLowerCase(),
+        workshop,
+        setResData
+      );
       setIsCompleted(completed);
       setCelebrate(false);
 
@@ -129,24 +136,29 @@ export default function CertificateDownload() {
             <img
               src={logo}
               className="h-44 w-44 bg-blend-lighten blur-lg animate-pulse  relative"
+              alt={"bg-logo"}
             />
-            <img src={logo} className="h-44 w-44  absolute top-0 " />
+            <img
+              src={logo}
+              alt={"logo"}
+              className="h-44 w-44  absolute top-0 "
+            />
           </div>
           <CardTitle className="text-3xl arima font-semibold lg:text-3xl text-center text-gray-800">
             <b>MLSC Workshop Certificate </b>{" "}
           </CardTitle>
         </CardHeader>
         <CardContent className="col-span-2 my-auto">
-          <form  onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4 ">
             <Select value={workshop} required onValueChange={setWorkshop}>
-              <SelectTrigger className="h-12  poppins-regular text-wrap text-base lg:text-lg">
+              <SelectTrigger className="h-12   poppins-regular text-wrap text-base lg:text-lg">
                 <SelectValue placeholder="Select workshop" />
               </SelectTrigger>
               <SelectContent className="h-18 ">
                 {workshops.map((w) => (
                   <SelectItem
                     key={w.value}
-                    className="text-base lg:text-lg"
+                    className="text-base  lg:text-lg"
                     value={w.value}
                     aria-required={true}
                   >
@@ -171,15 +183,15 @@ export default function CertificateDownload() {
             />
 
             {open && (
-              <Command>
+              <Command className="">
                 <CommandList>
                   <CommandEmpty>No User found.</CommandEmpty>
-                  <CommandGroup className="border border-gray-200">
+                  <CommandGroup className="border border-gray-200 ">
                     {searchResult.slice(0, 3).map((user) => (
                       <CommandItem
                         key={user}
                         value={user}
-                        className="text-lg !my-1 first:!bg-violet-100 hover:!bg-gray-200 first:font-semibold uppercase"
+                        className="text-lg !my-1  hover:transition-all first:!bg-violet-100 hover:!bg-gray-200 first:font-semibold uppercase"
                         onSelect={(currentValue) => {
                           setValue(currentValue === value ? "" : currentValue);
                           setOpen(false);
@@ -221,7 +233,9 @@ export default function CertificateDownload() {
           {error && (
             <Alert variant="destructive" className="mt-4">
               <AlertCircle className="h-4 w-4" />
-              <AlertDescription className="mt-1 text-red-600">{error}</AlertDescription>
+              <AlertDescription className="mt-1 text-red-600">
+                {error}
+              </AlertDescription>
             </Alert>
           )}
 
