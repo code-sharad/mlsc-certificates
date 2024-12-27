@@ -130,7 +130,7 @@ export default function CertificateDownload() {
       <div>
         {celebrate && <Realistic autorun={{ duration: 4, speed: 30 }} />}
       </div>
-      <Card className="lg:max-w-[900px] bg-white/60 backdrop-blur-md lg:p-14 lg:max-h-[500px] lg:grid lg:grid-cols-3 place-content-center ">
+      <Card className="lg:max-w-[900px] bg-white/60  lg:p-14 lg:max-h-[500px] lg:grid lg:grid-cols-3 place-content-center ">
         <CardHeader className="col-span-1 w-full">
           <div className="relative mx-auto">
             <img
