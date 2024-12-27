@@ -158,7 +158,7 @@ export default function CertificateDownload() {
                 {workshops.map((w) => (
                   <SelectItem
                     key={w.value}
-                    className="text-base bg-white  lg:text-lg"
+                    className="text-[18px] py-2 px-3 bg-white my-2   lg:text-lg"
                     value={w.value}
                     aria-required={true}
                   >
