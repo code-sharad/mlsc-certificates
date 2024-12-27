@@ -126,11 +126,11 @@ export default function CertificateDownload() {
   };
 
   return (
-    <div className="z-10">
+    <div className="z-10 ">
       <div>
         {celebrate && <Realistic autorun={{ duration: 4, speed: 30 }} />}
       </div>
-      <Card className="lg:max-w-[900px] lg:p-14 lg:max-h-[500px] lg:grid lg:grid-cols-3 place-content-center ">
+      <Card className="lg:max-w-[900px] bg-white/60 backdrop-blur-md lg:p-14 lg:max-h-[500px] lg:grid lg:grid-cols-3 place-content-center ">
         <CardHeader className="col-span-1 w-full">
           <div className="relative mx-auto">
             <img
@@ -151,14 +151,14 @@ export default function CertificateDownload() {
         <CardContent className="col-span-2 my-auto">
           <form onSubmit={handleSubmit} className="space-y-4 ">
             <Select value={workshop} required onValueChange={setWorkshop}>
-              <SelectTrigger className="h-12   poppins-regular text-wrap text-base lg:text-lg">
+              <SelectTrigger className="h-12 bg-white  poppins-regular text-wrap text-base lg:text-lg">
                 <SelectValue placeholder="Select workshop" />
               </SelectTrigger>
               <SelectContent className="h-18 ">
                 {workshops.map((w) => (
                   <SelectItem
                     key={w.value}
-                    className="text-base  lg:text-lg"
+                    className="text-base bg-white  lg:text-lg"
                     value={w.value}
                     aria-required={true}
                   >
@@ -169,7 +169,7 @@ export default function CertificateDownload() {
             </Select>
 
             <Input
-              className="poppins-regular text-lg h-12 lg:h-12 lg:text-xl"
+              className="poppins-regular bg-white text-lg h-12 lg:h-12 lg:text-xl"
               type="text"
               placeholder="Enter Full Name"
               value={fullname}
@@ -186,12 +186,12 @@ export default function CertificateDownload() {
               <Command className="">
                 <CommandList>
                   <CommandEmpty>No User found.</CommandEmpty>
-                  <CommandGroup className="border border-gray-200 ">
+                  <CommandGroup className="border border-gray-200 rounded-md shadow-sm">
                     {searchResult.slice(0, 3).map((user) => (
                       <CommandItem
                         key={user}
                         value={user}
-                        className="text-lg !my-1  hover:transition-all first:!bg-violet-100 hover:!bg-gray-200 first:font-semibold uppercase"
+                        className="text-lg !my-1   hover:transition-all first:!bg-violet-100 hover:!bg-gray-200 first:font-semibold uppercase"
                         onSelect={(currentValue) => {
                           setValue(currentValue === value ? "" : currentValue);
                           setOpen(false);
