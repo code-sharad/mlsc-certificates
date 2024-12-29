@@ -150,7 +150,7 @@ export default function CertificateDownload() {
         </CardHeader>
         <CardContent className="col-span-2 my-auto">
           <form onSubmit={handleSubmit} className="space-y-4 ">
-            <Select value={workshop} required onValueChange={setWorkshop}>
+            <Select disabled={isCompleted} value={workshop} required onValueChange={setWorkshop}>
               <SelectTrigger className="h-12 bg-white  poppins-regular text-wrap text-base lg:text-lg">
                 <SelectValue placeholder="Select workshop" />
               </SelectTrigger>
