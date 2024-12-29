@@ -144,7 +144,7 @@ export default function CertificateDownload() {
               className="h-44 w-44  absolute top-0 "
             />
           </div>
-          <CardTitle className="text-3xl arima font-semibold lg:text-3xl text-center text-gray-800">
+          <CardTitle className="text-3xl poppins-thin font-semibold lg:text-[28px] text-center text-gray-800">
             <b>MLSC Workshop Certificate </b>{" "}
           </CardTitle>
         </CardHeader>
@@ -222,7 +222,7 @@ export default function CertificateDownload() {
                   "Checking... "
                 ) : (
                   <div className="flex gap-3 ">
-                    <span>👉</span>
+                    {/* <span>👉</span> */}
                     <span className="poppins-regular">Get Certificate</span>
                   </div>
                 )}
