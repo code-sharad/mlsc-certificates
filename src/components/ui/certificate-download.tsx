@@ -19,7 +19,8 @@ import {
   CommandList,
 } from "@/components/ui/command";
 
-import logo from "../../../public/image.png";
+import mlsc from "../../../public/mlsc.png";
+import gdsc from "../../../public/gdsc.png";
 import Realistic from "react-canvas-confetti/dist/presets/realistic";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -68,7 +69,7 @@ const searchUser = async (
     console.log(error);
   }
 };
-const workshops = [
+const mlsc_workshops = [
   {
     value: "Web Development and Cloud Hosting",
   },
@@ -77,7 +78,25 @@ const workshops = [
   },
 ];
 
-export default function CertificateDownload() {
+const gdsc_workshops = [
+  {
+    value: "Data Science Decoded",
+  },
+];
+
+/**
+ * Represents a workshop name and its value
+ * @example
+ * const workshop: workshop_name = {
+ *   value: "Web Development and Cloud Hosting"
+ * }
+ */
+
+export default function CertificateDownload({
+  workshop_name,
+}: {
+  workshop_name: string;
+}) {
   const [fullname, setFullName] = useState("");
   const [workshop, setWorkshop] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
@@ -132,39 +151,64 @@ export default function CertificateDownload() {
       </div>
       <Card className="lg:max-w-[900px] bg-white/60  lg:p-14 lg:max-h-[500px] lg:grid lg:grid-cols-3 place-content-center ">
         <CardHeader className="col-span-1 w-full">
-          <div className="relative mx-auto">
-            <img
-              src={logo}
-              className="h-44 w-44 bg-blend-lighten blur-lg animate-pulse  relative"
-              alt={"bg-logo"}
-            />
-            <img
-              src={logo}
-              alt={"logo"}
-              className="h-44 w-44  absolute top-0 "
-            />
-          </div>
+          {workshop_name === "mlsc" ? (
+            <div className="relative mx-auto">
+              <img
+                src={mlsc}
+                className="h-44 w-44 bg-blend-lighten blur-lg animate-pulse  relative"
+                alt={"bg-logo"}
+              />
+              <img
+                src={mlsc}
+                alt={"logo"}
+                className="h-44 w-44  absolute top-0 "
+              />
+            </div>
+          ) : (
+            <div className="relative mx-auto">
+              <img
+                src={gdsc}
+                className="h-44 w-44 scale-75 bg-blend-lighten blur-lg animate-pulse  relative"
+                alt={"bg-logo"}
+              />
+              <img
+                src={gdsc}
+                alt={"logo"}
+                className="h-44 w-44 scale-75 absolute top-0 "
+              />
+            </div>
+          )}
           <CardTitle className="text-3xl poppins-thin font-semibold lg:text-[28px] text-center text-gray-800">
-            <b>MLSC Workshop Certificate </b>{" "}
+            {workshop_name === "mlsc" ? (
+              <b>MLSC Workshop Certificate </b>
+            ) : (
+              <b> GDSC Workshop Certificate</b>
+            )}{" "}
           </CardTitle>
         </CardHeader>
         <CardContent className="col-span-2 my-auto">
           <form onSubmit={handleSubmit} className="space-y-4 ">
-            <Select disabled={isCompleted} value={workshop} required onValueChange={setWorkshop}>
+            <Select
+              disabled={isCompleted}
+              value={workshop}
+              required
+              onValueChange={setWorkshop}
+            >
               <SelectTrigger className="h-12 bg-white  poppins-regular text-wrap text-base lg:text-lg">
                 <SelectValue placeholder="Select workshop" />
               </SelectTrigger>
               <SelectContent className="h-18 ">
-                {workshops.map((w) => (
-                  <SelectItem
-                    key={w.value}
-                    className="text-[18px] py-2 px-3 bg-white my-2   lg:text-lg"
-                    value={w.value}
-                    aria-required={true}
-                  >
-                    {w.value}
-                  </SelectItem>
-                ))}
+                {workshop_name === "mlsc"
+                  ? mlsc_workshops.map((workshop) => (
+                      <SelectItem key={workshop.value} value={workshop.value}>
+                        {workshop.value}
+                      </SelectItem>
+                    ))
+                  : gdsc_workshops.map((workshop) => (
+                      <SelectItem key={workshop.value} value={workshop.value}>
+                        {workshop.value}
+                      </SelectItem>
+                    ))}
               </SelectContent>
             </Select>
 
